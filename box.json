@@ -25,10 +25,14 @@
     },
     "installPaths":{
         "coldbox":"coldbox/",
-        "testbox":"testbox/"
+        "testbox":"testbox/",
+        "qb":"modules/qb/",
+        "cbmarkdown":"modules/cbmarkdown/"
     },
     "dependencies":{
-        "coldbox":"^7.0.0"
+        "coldbox":"^7.0.0",
+        "qb":"^9.11.0",
+        "cbmarkdown":"^3.6.0+1"
     },
     "scripts":{
         "postInstall":"pathExists .env || cp .env.example .env && package set ignore=[]",

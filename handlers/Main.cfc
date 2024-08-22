@@ -1,5 +1,7 @@
 component extends="coldbox.system.EventHandler" {
 
+	property name="processor" inject="Processor@cbmarkdown";
+
 	/**
 	 * Default Action
 	 */
@@ -14,9 +16,8 @@ component extends="coldbox.system.EventHandler" {
 	function data( event, rc, prc ){
 		var post = getInstance( "Post" );
 		post.getPostById( "a768aa70-5ff7-11ef-b36c-9a6c4d3d4dca" );
-
-		writeDump( var = post.getMemento(), abort = 1 );
-		writeDump( var = "bottom of method", abort = 1 );
+		prc[ "post" ]     = post.getMemento();
+		prc[ "rendered" ] = processor.toHtml( post.getBody() );
 	}
 
 	/**

@@ -1,5 +1,7 @@
 component display="Post" accessors="true" {
 
+	property name="wirebox" inject="wirebox";
+
 	property name="id"           type="string";
 	property name="title"        type="string";
 	property name="slug"         type="string";
@@ -22,29 +24,14 @@ component display="Post" accessors="true" {
 	}
 
 	function getPostById( required string id ){
-		var sql = "
-			SELECT
-				id,
-				title,
-				slug,
-				description,
-				body,
-				created,
-				last_updated
-			FROM Post
-			WHERE id = :id
-		";
-		var params = { "id" : { cfsqltype : "cf_sql_varchar", value : arguments.id } };
-		var post   = queryExecute( sql, params );
-
-		if ( post.recordCount ) {
-			setId( post.id );
-			setTitle( post.title );
-			setSlug( post.slug );
-			setDescription( post.description );
-			setBody( post.body );
-			setCreated( post.created );
-			setLast_updated( post.last_updated );
+		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
+		var post = qb.from( "Post" ).findOrFail( arguments.id );
+		// call setters
+		if ( !post.isEmpty() ) {
+			for ( key in post ) {
+				local.func = "set" & key;
+				variables[ local.func ]( post[ key ] );
+			}
 		}
 	}
 
