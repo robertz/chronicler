@@ -10,6 +10,11 @@ component display="Post" accessors="true" {
 	property name="created"      type="timestamp";
 	property name="last_updated" type="timestamp";
 
+	/**
+	 * Gets the memento for the bean
+	 *
+	 * @return the current memento
+	 */
 	function getMemento(){
 		var post = {
 			"id"           : getId(),
@@ -23,16 +28,32 @@ component display="Post" accessors="true" {
 		return post;
 	}
 
-	function getPostById( required string id ){
+	/**
+	 * Gets the post specified by id
+	 *
+	 * @id guid of post to get
+	 */
+	function getById( required string id ){
 		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
-		var post = qb.from( "Post" ).findOrFail( arguments.id );
-		// call setters
+		var post = qb.from( "Post" ).find( arguments.id );
 		if ( !post.isEmpty() ) {
-			for ( key in post ) {
-				local.func = "set" & key;
-				variables[ local.func ]( post[ key ] );
-			}
+			wirebox.getObjectPopulator().populateFromStruct( target = this, memento = post );
 		}
+	}
+
+	/**
+	 * Persist the current bean
+	 */
+	function save(){
+		var qb = wirebox.getInstance( "QueryBuilder@qb" );
+		qb.from( "Post" )
+			.where( "id", getId() )
+			.updateOrInsert( {
+				"title"       : getTitle(),
+				"slug"        : getSlug(),
+				"description" : getDescription(),
+				"body"        : getBody()
+			} );
 	}
 
 }

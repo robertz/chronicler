@@ -1,7 +1,7 @@
 <cfoutput>
     <!--- <cfdump var="#prc.post#" /> --->
 
-    <div>
+    <div class="">
         #prc.rendered#
     </div>
 

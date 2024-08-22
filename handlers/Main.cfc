@@ -11,23 +11,6 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	/**
-	 * Produce some restfulf data
-	 */
-	function data( event, rc, prc ){
-		var post = getInstance( "Post" );
-		post.getPostById( "a768aa70-5ff7-11ef-b36c-9a6c4d3d4dca" );
-		prc[ "post" ]     = post.getMemento();
-		prc[ "rendered" ] = processor.toHtml( post.getBody() );
-	}
-
-	/**
-	 * Relocation example
-	 */
-	function doSomething( event, rc, prc ){
-		relocate( "main.index" );
-	}
-
-	/**
 	 * --------------------------------------------------------------------------
 	 * Implicit Actions
 	 * --------------------------------------------------------------------------

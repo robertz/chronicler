@@ -62,12 +62,12 @@
 	</header>
 
 	<!---Container And Views --->
-	<main class="flex-shrink-0">
+	<main class="container">
 		#view()#
 	</main>
 
 	<!--- Footer --->
-	<footer class="w-100 bottom-0 position-fixed border-top py-3 mt-5 bg-light">
+	<!--- <footer class="w-100 bottom-0 position-fixed border-top py-3 mt-5 bg-light">
 		<div class="container">
 			<p class="float-end">
 				<a href="##" class="btn btn-info rounded-circle shadow" role="button">
@@ -75,7 +75,7 @@
 				</a>
 			</p>
 		</div>
-	</footer>
+	</footer> --->
 
 	<!---
 		JavaScript
