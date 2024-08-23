@@ -6,7 +6,7 @@
 				<div class="card-text">
 					<div class="row">
 						<div class="col-2 my-1 text-end pt-2 fw-bold">ID:</div>
-						<div class="col-10 my-1"><input type="text" class="form-control" name="id" value="#prc.post.id#" readonly></div>
+						<div class="col-10 my-1"><input type="text" class="form-control" name="id" value="#prc.id#" readonly></div>
 
 						<div class="col-2 my-1 text-end pt-2 fw-bold">Title:</div>
 						<div class="col-10 my-1"><input type="text" class="form-control" name="title" value="#prc.post.title#"></div>

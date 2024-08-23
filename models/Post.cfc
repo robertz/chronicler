@@ -67,14 +67,16 @@ component display="Post" accessors="true" {
 	 * Persist the current bean
 	 */
 	function save(){
-		var qb  = wirebox.getInstance( "QueryBuilder@qb" );
-		var obj = getMemento();
+		var qb     = wirebox.getInstance( "QueryBuilder@qb" );
+		var obj    = getMemento();
+		var ignore = [ "created", "last_updated" ];
+		ignore.each( ( el ) => {
+			obj.delete( el );
+		} );
+		obj.id = trim( obj.id );
 		if ( !variables.publish_date.len() ) obj.delete( "publish_date" );
-		obj.delete( "created" );
-		obj.delete( "last_updated" )
-
 		qb.from( "Post" )
-			.where( "id", variables.id )
+			.where( "id", obj.id )
 			.updateOrInsert( obj );
 	}
 

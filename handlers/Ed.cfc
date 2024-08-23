@@ -39,7 +39,7 @@ component extends="coldbox.system.EventHandler" {
 	 */
 	function edit( event, rc, prc ){
 		var post    = getInstance( "Post" );
-		prc[ "id" ] = event.getValue( "id", "" );
+		prc[ "id" ] = event.getValue( "id", lCase( createGUID() ) );
 		post.getById( prc.id );
 		prc[ "post" ] = post.getMemento();
 	}

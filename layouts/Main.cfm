@@ -20,10 +20,10 @@
 	<title>KISDigital</title>
 </head>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="50" style="padding-top: 60px" class="d-flex flex-column h-100">
+<body data-spy="scroll" data-target=".navbar" data-offset="50" style="padding-top: 60px" class="d-flex flex-column h-100 bg-secondary">
 	<!---Top NavBar --->
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div class="container-fluid">
 				<!---Brand --->
 				<a class="navbar-brand" href="#event.buildLink( '' )#">
