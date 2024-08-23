@@ -11,17 +11,21 @@ component display="Post" accessors="true" {
 	property name="body";
 	property name="created";
 	property name="last_updated";
+	property name="publish_date";
 
 	/**
 	 * Initialize the object
 	 */
 	function init(){
-		variables.id          = "";
-		variables.title       = "";
-		variables.slug        = "";
-		variables.description = "";
-		variables.cover_image = "";
-		variables.body        = "";
+		variables.id           = "";
+		variables.title        = "";
+		variables.slug         = "";
+		variables.description  = "";
+		variables.cover_image  = "";
+		variables.body         = "";
+		variables.created      = "";
+		variables.last_updated = "";
+		variables.publish_date = "";
 
 		return this;
 	}
@@ -40,7 +44,8 @@ component display="Post" accessors="true" {
 			"cover_image"  : variables.cover_image,
 			"body"         : variables.body,
 			"created"      : variables.created,
-			"last_updated" : variables.last_updated
+			"last_updated" : variables.last_updated,
+			"publish_date" : variables.publish_date
 		}
 		return post;
 	}

@@ -6,7 +6,7 @@ component extends="coldbox.system.EventHandler" {
 	 * Default Action
 	 */
 	function index( event, rc, prc ){
-		prc[ "posts" ] = PostService.listPosts();
+		prc[ "posts" ] = PostService.listPublishedPosts();
 	}
 
 	/**

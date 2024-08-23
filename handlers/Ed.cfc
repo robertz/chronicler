@@ -11,7 +11,8 @@ component extends="coldbox.system.EventHandler" {
 	 * @prc  
 	 */
 	function index( event, rc, prc ){
-		prc[ "posts" ] = PostService.listPosts();
+		prc.drafts    = PostService.listDraftPosts();
+		prc.published = PostService.listPublishedPosts();
 	}
 
 	/**
