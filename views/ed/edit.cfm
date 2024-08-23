@@ -11,14 +11,14 @@
 					<div class="col-2 my-1 text-end pt-2 fw-bold">Title:</div>
 					<div class="col-10 my-1"><input type="text" class="form-control" name="title" value="#prc.post.title#"></div>
 
+					<div class="col-2 my-1 text-end pt-2 fw-bold">Slug:</div>
+					<div class="col-10 my-1"><input type="text" class="form-control" name="slug" value="#prc.post.slug#"></div>
+
 					<div class="col-2 my-1 text-end pt-2 fw-bold">Description:</div>
 					<div class="col-10 my-1"><input type="text" class="form-control" name="description" value="#prc.post.description#"></div>
 
 					<div class="col-2 my-1 text-end pt-2 fw-bold">Cover Image:</div>
 					<div class="col-10 my-1"><input type="text" class="form-control" name="cover_image" value="#prc.post.cover_image#"></div>
-
-					<div class="col-2 my-1 text-end pt-2 fw-bold">Slug:</div>
-					<div class="col-10 my-1"><input type="text" class="form-control" name="slug" value="#prc.post.slug#"></div>
 
 				</div>
 
