@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="card-text">
                 <h5 class="card-title">Draft Posts</h5>
-                <table class="table table-striped table-bordered table-sm	">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <th>Actions</th>
                         <th>Title</th>
@@ -17,8 +17,8 @@
                         <cfloop array="#prc.drafts#" index="p">
                             <tr>
                                 <td>
-                                    <a href="/ed/view/id/#p.id#">View</a>
-                                    <a href="/ed/edit/id/#p.id#">Edit</a>
+                                    <a href="/ed/view/id/#p.id#"><i class="bi bi-eye-fill m-2"></i></a>
+                                    <a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
                                 </td>
                                 <td>#p.title#</td>
                                 <td>#dateTimeFormat(p.created, "medium")#</td>
@@ -37,7 +37,7 @@
         <div class="card-body">
             <div class="card-text">
 				<h5 class="card-title">Published Posts</h5>
-                <table class="table table-striped table-bordered table-sm	">
+                <table class="table table-striped table-bordered">
                     <thead>
 						<th>Actions</th>
                         <th>Title</th>
@@ -47,8 +47,8 @@
                         <cfloop array="#prc.published#" index="p">
                             <tr>
 								<td>
-									<a href="/ed/view/id/#p.id#">View</a>
-									<a href="/ed/edit/id/#p.id#">Edit</a>
+									<a href="/ed/view/id/#p.id#"><i class="bi bi-eye-fill m-2"></i></a>
+									<a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
 								</td>
                                 <td>#p.title#</td>
                                 <td>#dateTimeFormat(p.publish_date, "medium")#</td>

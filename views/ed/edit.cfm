@@ -20,6 +20,9 @@
 						<div class="col-2 my-1 text-end pt-2 fw-bold">Cover Image:</div>
 						<div class="col-10 my-1"><input type="text" class="form-control" name="cover_image" value="#prc.post.cover_image#"></div>
 
+						<div class="col-2 my-1 text-end pt-2 fw-bold">Publish Date:</div>
+						<div class="col-10 my-1"><input type="text" class="form-control" name="publish_date" value="#dateTimeFormat(prc.post.publish_date, "yyyy-mm-dd' 'HH:nn:ss")#"></div>
+
 					</div>
 
 					<textarea class="form-control my-4" rows="20" name="body">#prc.post.body#</textarea>

@@ -67,16 +67,15 @@ component display="Post" accessors="true" {
 	 * Persist the current bean
 	 */
 	function save(){
-		var qb = wirebox.getInstance( "QueryBuilder@qb" );
+		var qb  = wirebox.getInstance( "QueryBuilder@qb" );
+		var obj = getMemento();
+		if ( !variables.publish_date.len() ) obj.delete( "publish_date" );
+		obj.delete( "created" );
+		obj.delete( "last_updated" )
+
 		qb.from( "Post" )
 			.where( "id", variables.id )
-			.updateOrInsert( {
-				"title"       : variables.title,
-				"slug"        : variables.slug,
-				"description" : variables.description,
-				"cover_image" : variables.cover_image,
-				"body"        : variables.body
-			} );
+			.updateOrInsert( obj );
 	}
 
 }

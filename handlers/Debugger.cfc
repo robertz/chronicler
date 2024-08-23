@@ -6,8 +6,8 @@ component extends="coldbox.system.EventHandler" {
 
 	function save( event, rc, prc ){
 		var post = getInstance( "Post" );
-		post.getById( "a768aa70-5ff7-11ef-b36c-9a6c4d3d4dca" );
-
+		post.getById( "531eb584-615c-11ef-b36c-9a6c4d3d4dca" );
+		post.save();
 
 		writeDump( var = post.getMemento(), abort = 1 );
 	}
