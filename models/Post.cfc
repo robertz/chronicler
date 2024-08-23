@@ -1,23 +1,28 @@
 component display="Post" accessors="true" {
 
-	property name="wirebox" inject="wirebox";
+	property name="populator" inject="wirebox:populator";
+	property name="wirebox"   inject="wirebox";
 
-	property name="id"           type="string";
-	property name="title"        type="string";
-	property name="slug"         type="string";
-	property name="description"  type="string";
-	property name="cover_image"  type="string";
-	property name="body"         type="string";
-	property name="created"      type="timestamp";
-	property name="last_updated" type="timestamp";
+	property name="id";
+	property name="title";
+	property name="slug";
+	property name="description";
+	property name="cover_image";
+	property name="body";
+	property name="created";
+	property name="last_updated";
 
+	/**
+	 * Initialize the object
+	 */
 	function init(){
-		setId( "" );
-		setTitle( "" );
-		setSlug( "" );
-		setDescription( "" );
-		setCover_image( "" );
-		setBody( "" );
+		variables.id          = "";
+		variables.title       = "";
+		variables.slug        = "";
+		variables.description = "";
+		variables.cover_image = "";
+		variables.body        = "";
+
 		return this;
 	}
 
@@ -28,14 +33,14 @@ component display="Post" accessors="true" {
 	 */
 	function getMemento(){
 		var post = {
-			"id"           : getId(),
-			"title"        : getTitle(),
-			"slug"         : getSlug(),
-			"description"  : getDescription(),
-			"cover_image"  : getCover_image(),
-			"body"         : getBody(),
-			"created"      : getCreated(),
-			"last_updated" : getLast_updated()
+			"id"           : variables.id,
+			"title"        : variables.title,
+			"slug"         : variables.slug,
+			"description"  : variables.description,
+			"cover_image"  : variables.cover_image,
+			"body"         : variables.body,
+			"created"      : variables.created,
+			"last_updated" : variables.last_updated
 		}
 		return post;
 	}
@@ -49,7 +54,7 @@ component display="Post" accessors="true" {
 		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
 		var post = qb.from( "Post" ).find( arguments.id );
 		if ( !post.isEmpty() ) {
-			wirebox.getObjectPopulator().populateFromStruct( target = this, memento = post );
+			populator.populateFromStruct( target = this, memento = post );
 		}
 	}
 
@@ -59,13 +64,13 @@ component display="Post" accessors="true" {
 	function save(){
 		var qb = wirebox.getInstance( "QueryBuilder@qb" );
 		qb.from( "Post" )
-			.where( "id", getId() )
+			.where( "id", variables.id )
 			.updateOrInsert( {
-				"title"       : getTitle(),
-				"slug"        : getSlug(),
-				"description" : getDescription(),
-				"cover_image" : getCover_image(),
-				"body"        : getBody()
+				"title"       : variables.title,
+				"slug"        : variables.slug,
+				"description" : variables.description,
+				"cover_image" : variables.cover_image,
+				"body"        : variables.body
 			} );
 	}
 
