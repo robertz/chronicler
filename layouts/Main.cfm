@@ -48,7 +48,7 @@
 	</header>
 
 	<!---Container And Views --->
-	<main class="container">
+	<main class="flex-shrink-0">
 		#view()#
 	</main>
 
