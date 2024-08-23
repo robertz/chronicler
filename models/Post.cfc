@@ -6,9 +6,20 @@ component display="Post" accessors="true" {
 	property name="title"        type="string";
 	property name="slug"         type="string";
 	property name="description"  type="string";
+	property name="cover_image"  type="string";
 	property name="body"         type="string";
 	property name="created"      type="timestamp";
 	property name="last_updated" type="timestamp";
+
+	function init(){
+		setId( "" );
+		setTitle( "" );
+		setSlug( "" );
+		setDescription( "" );
+		setCover_image( "" );
+		setBody( "" );
+		return this;
+	}
 
 	/**
 	 * Gets the memento for the bean
@@ -21,6 +32,7 @@ component display="Post" accessors="true" {
 			"title"        : getTitle(),
 			"slug"         : getSlug(),
 			"description"  : getDescription(),
+			"cover_image"  : getCover_image(),
 			"body"         : getBody(),
 			"created"      : getCreated(),
 			"last_updated" : getLast_updated()
@@ -52,6 +64,7 @@ component display="Post" accessors="true" {
 				"title"       : getTitle(),
 				"slug"        : getSlug(),
 				"description" : getDescription(),
+				"cover_image" : getCover_image(),
 				"body"        : getBody()
 			} );
 	}

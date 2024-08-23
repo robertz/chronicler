@@ -16,6 +16,7 @@ component {
 				"title",
 				"slug",
 				"description",
+				"cover_image",
 				"created",
 				"last_updated"
 			] )

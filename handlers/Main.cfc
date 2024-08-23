@@ -1,13 +1,12 @@
 component extends="coldbox.system.EventHandler" {
 
-	property name="processor" inject="Processor@cbmarkdown";
+	property name="PostService" inject;
 
 	/**
 	 * Default Action
 	 */
 	function index( event, rc, prc ){
-		prc.welcomeMessage = "Welcome to ColdBox!";
-		event.setView( "main/index" );
+		prc[ "posts" ] = PostService.listPosts();
 	}
 
 	/**
