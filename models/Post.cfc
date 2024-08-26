@@ -12,6 +12,7 @@ component display="Post" accessors="true" {
 	property name="created";
 	property name="last_updated";
 	property name="publish_date";
+	property name="display_name";
 
 	/**
 	 * Initialize the object
@@ -26,6 +27,9 @@ component display="Post" accessors="true" {
 		variables.created      = "";
 		variables.last_updated = "";
 		variables.publish_date = "";
+
+		// computed
+		variables.display_name = "";
 
 		return this;
 	}
@@ -45,7 +49,8 @@ component display="Post" accessors="true" {
 			"body"         : variables.body,
 			"created"      : variables.created,
 			"last_updated" : variables.last_updated,
-			"publish_date" : variables.publish_date
+			"publish_date" : variables.publish_date,
+			"display_name" : variables.display_name
 		}
 		return post;
 	}
@@ -57,7 +62,24 @@ component display="Post" accessors="true" {
 	 */
 	function getById( required string id ){
 		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
-		var post = qb.from( "Post" ).find( arguments.id );
+		var post = qb
+			.from( "Post P" )
+			.select( [
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.body",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"A.display_name"
+			] )
+			.leftJoin( "PostAuthor PA", "PA.post_id", "=", "P.id" )
+			.leftJoin( "Author A", "A.id", "=", "PA.author_id" )
+			.find( arguments.id, "P.id" );
+
 		if ( !post.isEmpty() ) {
 			populator.populateFromStruct( target = this, memento = post );
 		}

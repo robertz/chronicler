@@ -10,17 +10,20 @@ component {
 	function listPosts(){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
-			.from( "Post" )
 			.select( [
-				"id",
-				"title",
-				"slug",
-				"description",
-				"cover_image",
-				"created",
-				"last_updated",
-				"publish_date"
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"A.display_name"
 			] )
+			.from( "Post P" )
+			.leftJoin( "PostAuthor PA", "PA.post_id", "=", "P.id" )
+			.leftJoin( "Author A", "A.id", "=", "PA.author_id" )
 			.orderBy( "publish_date", "desc" )
 			.get();
 	}
@@ -33,17 +36,20 @@ component {
 	function listPublishedPosts(){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
-			.from( "Post" )
 			.select( [
-				"id",
-				"title",
-				"slug",
-				"description",
-				"cover_image",
-				"created",
-				"last_updated",
-				"publish_date"
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"A.display_name"
 			] )
+			.from( "Post P" )
+			.leftJoin( "PostAuthor PA", "PA.post_id", "=", "P.id" )
+			.leftJoin( "Author A", "A.id", "=", "PA.author_id" )
 			.whereNotNull( "publish_date" )
 			.orderBy( "publish_date", "desc" )
 			.get();
@@ -57,17 +63,20 @@ component {
 	function listDraftPosts(){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
-			.from( "Post" )
 			.select( [
-				"id",
-				"title",
-				"slug",
-				"description",
-				"cover_image",
-				"created",
-				"last_updated",
-				"publish_date"
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"A.display_name"
 			] )
+			.from( "Post P" )
+			.leftJoin( "PostAuthor PA", "PA.post_id", "=", "P.id" )
+			.leftJoin( "Author A", "A.id", "=", "PA.author_id" )
 			.whereNull( "publish_date" )
 			.orderBy( "created", "desc" )
 			.get();

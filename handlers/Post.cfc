@@ -7,17 +7,21 @@ component extends="coldbox.system.EventHandler" {
 	function index( event, rc, prc ){
 		var post = wirebox
 			.getInstance( "QueryBuilder@qb" )
-			.from( "Post" )
 			.select( [
-				"title",
-				"slug",
-				"description",
-				"cover_image",
-				"created",
-				"last_updated",
-				"publish_date",
-				"body"
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.body",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"A.display_name"
 			] )
+			.from( "Post P" )
+			.leftJoin( "PostAuthor PA", "PA.post_id", "=", "P.id" )
+			.leftJoin( "Author A", "A.id", "=", "PA.author_id" )
 			.whereRaw(
 				"YEAR(publish_date) = ? AND MONTH(publish_date) = ? AND slug = ?",
 				[ int( rc.year ), int( rc.month ), rc.slug ]

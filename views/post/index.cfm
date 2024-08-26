@@ -13,7 +13,7 @@
 						</cfloop> --->
                             <p class="text-white small text-uppercase">
                                 #dateFormat(prc.post.created, "MMMM d, YYYY")# /
-                                <!--- #prc.author# ---> Rob
+                                #prc.post.display_name#
                             </p>
                         </div>
                     </div>
