@@ -73,10 +73,12 @@ component display="Post" accessors="true" {
 		ignore.each( ( el ) => {
 			obj.delete( el );
 		} );
-		obj.id = trim( obj.id );
+		// handle empty values
 		if ( !variables.publish_date.len() ) obj.delete( "publish_date" );
+		if ( !variables.id.len() ) obj.delete( "id" );
+		// save
 		qb.from( "Post" )
-			.where( "id", obj.id )
+			.where( "id", obj.id ?: "" )
 			.updateOrInsert( obj );
 	}
 

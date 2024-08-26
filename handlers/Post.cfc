@@ -26,6 +26,8 @@ component extends="coldbox.system.EventHandler" {
 
 		if ( isArray( post ) and len( post ) ) {
 			prc.post = post[ 1 ];
+		} else {
+			location( "/", false );
 		}
 
 		prc.rendered = processor.toHtml( prc.post.body );
