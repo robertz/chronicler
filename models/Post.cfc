@@ -91,17 +91,31 @@ component display="Post" accessors="true" {
 	function save(){
 		var qb     = wirebox.getInstance( "QueryBuilder@qb" );
 		var obj    = getMemento();
-		var ignore = [ "created", "last_updated" ];
+		var exists = len( trim( obj.id ) ) ? true : false;
+		var ignore = [ "created", "last_updated", "display_name" ];
+
 		ignore.each( ( el ) => {
 			obj.delete( el );
 		} );
 		// handle empty values
 		if ( !variables.publish_date.len() ) obj.delete( "publish_date" );
-		if ( !variables.id.len() ) obj.delete( "id" );
+		if ( !variables.id.len() ) {
+			obj.id = lCase( createGUID() );
+		}
+
 		// save
 		qb.from( "Post" )
-			.where( "id", obj.id ?: "" )
+			.where( "id", obj.id )
 			.updateOrInsert( obj );
+
+		// link the author to the post
+		wirebox
+			.getInstance( "QueryBuilder@qb" )
+			.from( "PostAuthor" )
+			.updateOrInsert( {
+				post_id   : obj.id,
+				author_id : "cf509c38-63c0-11ef-b36c-9a6c4d3d4dca"
+			} )
 	}
 
 }
