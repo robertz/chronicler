@@ -22,6 +22,8 @@ component {
 		 * Go get Funky!
 		 */
 
+		route( "/posts/:year/:month/:slug" ).to( "Post.index" ).end();
+
 		// A nice healthcheck route example
 		route( "/healthcheck", function( event, rc, prc ){
 			return "Ok!";
