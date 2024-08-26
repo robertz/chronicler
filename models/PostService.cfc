@@ -82,6 +82,13 @@ component {
 			.get();
 	}
 
+	/**
+	 * gets a post to display for users
+	 *
+	 * @criteria generally passed as RC scope from handler
+	 *
+	 * @return struct containing post data or empty
+	 */
 	function viewPost( required struct criteria ){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
@@ -103,9 +110,18 @@ component {
 			.whereRaw(
 				"YEAR(publish_date) = ? AND MONTH(publish_date) = ? AND slug = ?",
 				[
-					int( criteria.year ),
-					int( criteria.month ),
-					criteria.slug
+					{
+						value     : int( arguments.criteria.year ),
+						cfsqltype : "cf_sql_integer"
+					},
+					{
+						value     : int( arguments.criteria.month ),
+						cfsqltype : "cf_sql_integer"
+					},
+					{
+						value     : arguments.criteria.slug,
+						cfsqltype : "cf_sql_varchar"
+					}
 				]
 			)
 			.first();

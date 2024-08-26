@@ -108,14 +108,16 @@ component display="Post" accessors="true" {
 			.where( "id", obj.id )
 			.updateOrInsert( obj );
 
-		// link the author to the post
-		wirebox
-			.getInstance( "QueryBuilder@qb" )
-			.from( "PostAuthor" )
-			.updateOrInsert( {
-				post_id   : obj.id,
-				author_id : "cf509c38-63c0-11ef-b36c-9a6c4d3d4dca"
-			} )
+		if ( !exists ) {
+			// 	// link the author to the post
+			wirebox
+				.getInstance( "QueryBuilder@qb" )
+				.from( "PostAuthor" )
+				.updateOrInsert( {
+					post_id   : obj.id,
+					author_id : "cf509c38-63c0-11ef-b36c-9a6c4d3d4dca"
+				} )
+		}
 	}
 
 }
