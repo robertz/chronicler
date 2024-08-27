@@ -96,7 +96,7 @@ component display="Post" accessors="true" {
 	 * @return current instance (for chaining)
 	 */
 	function getByRouteParams( required struct criteria ){
-		if ( ( !isNumeric( arguments.criteria.year ) || !isNumeric( argument.criteria.month ) ) ) return this;
+		if ( ( !isNumeric( arguments.criteria.year ) || !isNumeric( arguments.criteria.month ) ) ) return this;
 		var post = wirebox
 			.getInstance( "QueryBuilder@qb" )
 			.select( [
