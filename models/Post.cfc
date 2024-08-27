@@ -59,6 +59,8 @@ component display="Post" accessors="true" {
 	 * Gets the post specified by id
 	 *
 	 * @id guid of post to get
+	 *
+	 * @return current instance (for chaining)
 	 */
 	function getById( required string id ){
 		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
@@ -74,15 +76,67 @@ component display="Post" accessors="true" {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"A.display_name"
+				"U.display_name"
 			] )
-			.leftJoin( "PostAuthor PA", "PA.post_id", "=", "P.id" )
-			.leftJoin( "Author A", "A.id", "=", "PA.author_id" )
+			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
+			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.find( arguments.id, "P.id" );
 
 		if ( !post.isEmpty() ) {
 			populator.populateFromStruct( target = this, memento = post );
 		}
+		return this;
+	}
+
+	/**
+	 * Gets the post specified by the route parameters
+	 *
+	 * @criteria route parameters
+	 *
+	 * @return current instance (for chaining)
+	 */
+	function getByRouteParams( required struct criteria ){
+		if ( ( !isNumeric( arguments.criteria.year ) || !isNumeric( argument.criteria.month ) ) ) return this;
+		var post = wirebox
+			.getInstance( "QueryBuilder@qb" )
+			.select( [
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.body",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"U.display_name"
+			] )
+			.from( "Post P" )
+			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
+			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.whereRaw(
+				"YEAR(publish_date) = ? AND MONTH(publish_date) = ? AND slug = ?",
+				[
+					{
+						value     : int( arguments.criteria.year ),
+						cfsqltype : "cf_sql_integer"
+					},
+					{
+						value     : int( arguments.criteria.month ),
+						cfsqltype : "cf_sql_integer"
+					},
+					{
+						value     : arguments.criteria.slug,
+						cfsqltype : "cf_sql_varchar"
+					}
+				]
+			)
+			.first();
+
+		if ( !post.isEmpty() ) {
+			populator.populateFromStruct( target = this, memento = post );
+		}
+		return this;
 	}
 
 	/**
@@ -112,10 +166,10 @@ component display="Post" accessors="true" {
 			// 	// link the author to the post
 			wirebox
 				.getInstance( "QueryBuilder@qb" )
-				.from( "PostAuthor" )
+				.from( "UserPost" )
 				.updateOrInsert( {
-					post_id   : obj.id,
-					author_id : "cf509c38-63c0-11ef-b36c-9a6c4d3d4dca"
+					post_id : obj.id,
+					user_id : "cf509c38-63c0-11ef-b36c-9a6c4d3d4dca"
 				} )
 		}
 	}

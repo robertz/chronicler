@@ -9,13 +9,6 @@ box install
 ### Schema
 
 ``` sql
-create table Author
-(
-    id           varchar(36) default (uuid()) not null
-        primary key,
-    display_name varchar(50)                  null
-);
-
 create table Post
 (
     id           varchar(36) default (uuid())          not null
@@ -30,16 +23,25 @@ create table Post
     publish_date timestamp                             null
 );
 
-create table PostAuthor
+create table User
 (
-    post_id   varchar(36) not null,
-    author_id varchar(36) not null,
-    primary key (post_id, author_id),
-    constraint PostAuthor_Author_id_fk
-        foreign key (author_id) references Author (id),
-    constraint PostAuthor_Post_id_fk
-        foreign key (post_id) references Post (id)
+    id           varchar(36) default (uuid()) not null
+        primary key,
+    display_name varchar(50)                  null
 );
+
+create table UserPost
+(
+    user_id varchar(36) not null,
+    post_id varchar(36) not null,
+    primary key (user_id, post_id),
+    constraint UserPost_Post_id_fk
+        foreign key (post_id) references Post (id),
+    constraint UserPost_User_id_fk
+        foreign key (user_id) references User (id)
+);
+
+
 ```
 
 ### THE DAILY BREAD
