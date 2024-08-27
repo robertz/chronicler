@@ -66,6 +66,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 	<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<cfif prc.keyExists("footerJS")>
+		<cfloop array="#prc.footerJS#" index="i">
+			#i#
+		</cfloop>
+	</cfif>
 </body>
 
 </html>
