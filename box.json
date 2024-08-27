@@ -27,12 +27,14 @@
         "coldbox":"coldbox/",
         "testbox":"testbox/",
         "qb":"modules/qb/",
-        "cbmarkdown":"modules/cbmarkdown/"
+        "cbmarkdown":"modules/cbmarkdown/",
+        "cbcsrf":"modules/cbcsrf/"
     },
     "dependencies":{
         "coldbox":"^7.0.0",
         "qb":"^9.11.0",
-        "cbmarkdown":"^3.6.0+1"
+        "cbmarkdown":"^3.6.0+1",
+        "cbcsrf":"^3.1.0+16"
     },
     "scripts":{
         "postInstall":"pathExists .env || cp .env.example .env && package set ignore=[]",

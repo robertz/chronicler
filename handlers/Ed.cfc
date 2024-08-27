@@ -3,6 +3,10 @@ component extends="coldbox.system.EventHandler" {
 	property name="processor"   inject="Processor@cbmarkdown";
 	property name="PostService" inject;
 
+	function preHandler( event, rc, prc, action, eventArguments ){
+		if ( action == "index" ) return;
+	}
+
 	/**
 	 * index handler
 	 *

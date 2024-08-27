@@ -1,63 +1,27 @@
 <cfoutput>
-<div class="container">
+<div class="d-flex align-items-center flex-column">
 
 
-    <div class="card mt-5">
-        <div class="card-body">
-            <div class="card-text">
-                <h5 class="card-title">Draft Posts</h5>
-                <table class="table table-striped table-bordered">
-                    <thead>
-                        <th>Actions</th>
-                        <th>Title</th>
-                        <th>Created</th>
-						<th>Updated</th>
-                    </thead>
-                    <tbody>
-                        <cfloop array="#prc.drafts#" index="p">
-                            <tr>
-                                <td>
-                                    <a href="/ed/view/id/#p.id#"><i class="bi bi-eye-fill m-2"></i></a>
-                                    <a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
-                                </td>
-                                <td>#p.title#</td>
-                                <td>#dateTimeFormat(p.created, "medium")#</td>
-								<td>#dateTimeFormat(p.last_updated, "medium")#</td>
-                            </tr>
-                        </cfloop>
-                    </tbody>
-                </table>
+	<div class="mx-auto w-25">
+		<div class="card mt-5">
+			<div class="card-body">
+				<h5 class="card-title">Login</h5>
+				<div class="card-text">
+					<div class="mb-2">
+						<label for="user" class="form-label">Username:</label>
+						<input type="text" id="user" class="form-control" value="" />
+					</div>
 
-                <a href="/ed/edit" class="btn btn-primary">New Post</a>
-            </div>
-        </div>
-    </div>
+					<div class="mb-2">
+						<label for="pass">Password:</label>
+						<input type="text" id="pass" class="form-control" value="" />
+					</div>
 
-    <div class="card mt-5">
-        <div class="card-body">
-            <div class="card-text">
-				<h5 class="card-title">Published Posts</h5>
-                <table class="table table-striped table-bordered">
-                    <thead>
-						<th>Actions</th>
-                        <th>Title</th>
-                        <th>Published</th>
-                    </thead>
-                    <tbody>
-                        <cfloop array="#prc.published#" index="p">
-                            <tr>
-								<td>
-									<a href="/ed/view/id/#p.id#"><i class="bi bi-eye-fill m-2"></i></a>
-									<a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
-								</td>
-                                <td>#p.title#</td>
-                                <td>#dateTimeFormat(p.publish_date, "medium")#</td>
-                            </tr>
-                        </cfloop>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 </div>
 </cfoutput>

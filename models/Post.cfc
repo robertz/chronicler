@@ -163,7 +163,7 @@ component display="Post" accessors="true" {
 			.updateOrInsert( obj );
 
 		if ( !exists ) {
-			// 	// link the author to the post
+			// link the author to the post
 			wirebox
 				.getInstance( "QueryBuilder@qb" )
 				.from( "UserPost" )
