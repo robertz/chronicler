@@ -5,7 +5,7 @@ component extends="coldbox.system.EventHandler" {
 	property name="BCrypt"      inject="@BCrypt";
 
 	function preHandler( event, rc, prc, action, eventArguments ){
-		if ( action == "index" ) return;
+		if ( action == "index" || action == "logout" ) return;
 
 		if ( !client.keyExists( "uid" ) || !client.uid.len() ) relocate( "ed" );
 	}
@@ -34,6 +34,12 @@ component extends="coldbox.system.EventHandler" {
 		}
 		if ( client.keyExists( "uid" ) && client.uid.len() ) relocate( "ed.dashboard" );
 		prc.token = csrfToken();
+	}
+
+	function logout( event, rc, prc ){
+		client.delete( "uid" );
+		csrfRotate();
+		location( "/", false );
 	}
 
 	/**
