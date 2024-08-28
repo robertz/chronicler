@@ -19,11 +19,13 @@ component {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"U.display_name"
+				"U.display_name",
+				"V.views"
 			] )
 			.from( "Post P" )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.orderBy( "publish_date", "desc" )
 			.get();
 	}
@@ -45,11 +47,13 @@ component {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"U.display_name"
+				"U.display_name",
+				"V.views"
 			] )
 			.from( "Post P" )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.whereNotNull( "publish_date" )
 			.orderBy( "publish_date", "desc" )
 			.get();
@@ -72,11 +76,13 @@ component {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"U.display_name"
+				"U.display_name",
+				"V.views"
 			] )
 			.from( "Post P" )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.whereNull( "publish_date" )
 			.orderBy( "created", "desc" )
 			.get();
@@ -100,11 +106,13 @@ component {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"U.display_name"
+				"U.display_name",
+				"V.views"
 			] )
 			.from( "Post P" )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.whereNotNull( "publish_date" )
 			.orderBy( "publish_date", "desc" )
 			.get();

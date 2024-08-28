@@ -13,6 +13,7 @@ component display="Post" accessors="true" {
 	property name="last_updated";
 	property name="publish_date";
 	property name="display_name";
+	property name="views";
 
 	/**
 	 * Initialize the object
@@ -30,6 +31,7 @@ component display="Post" accessors="true" {
 
 		// computed
 		variables.display_name = "";
+		variables.views        = 0;
 
 		return this;
 	}
@@ -50,7 +52,8 @@ component display="Post" accessors="true" {
 			"created"      : variables.created,
 			"last_updated" : variables.last_updated,
 			"publish_date" : variables.publish_date,
-			"display_name" : variables.display_name
+			"display_name" : variables.display_name,
+			"views"        : variables.views
 		}
 		return post;
 	}
@@ -76,14 +79,17 @@ component display="Post" accessors="true" {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"U.display_name"
+				"U.display_name",
+				"V.views"
 			] )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.find( arguments.id, "P.id" );
 
 		if ( !post.isEmpty() ) {
 			populator.populateFromStruct( target = this, memento = post );
+			if ( isNull( variables.views ) || !isNumeric( variables.views ) ) variables.views = 0;
 		}
 		return this;
 	}
@@ -109,11 +115,13 @@ component display="Post" accessors="true" {
 				"P.created",
 				"P.last_updated",
 				"P.publish_date",
-				"U.display_name"
+				"U.display_name",
+				"V.views"
 			] )
 			.from( "Post P" )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.whereRaw(
 				"YEAR(publish_date) = ? AND MONTH(publish_date) = ? AND slug = ?",
 				[
@@ -135,10 +143,33 @@ component display="Post" accessors="true" {
 
 		if ( !post.isEmpty() ) {
 			populator.populateFromStruct( target = this, memento = post );
+			if ( isNull( variables.views ) || !isNumeric( variables.views ) ) variables.views = 0;
 		}
 		return this;
 	}
 
+	function updateViews(){
+		var c = wirebox
+			.getInstance( "QueryBuilder@qb" )
+			.from( "Views" )
+			.select( [ "views" ] )
+			.where( "post_id", getId() )
+			.first();
+
+		if ( c.isEmpty() ) {
+			wirebox
+				.getInstance( "QueryBuilder@qb" )
+				.from( "Views" )
+				.insert( { post_id : getId(), views : 1 } );
+		} else {
+			wirebox
+				.getInstance( "QueryBuilder@qb" )
+				.where( "post_id", getId() )
+				.from( "Views" )
+				.update( { views : c.views + 1 } );
+		}
+		return this;
+	}
 	/**
 	 * Persist the current bean
 	 */

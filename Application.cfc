@@ -15,7 +15,7 @@ component {
 	this.sessionManagement    = true;
 	this.clientManagement     = true;
 	this.sessionTimeout       = createTimespan( 0, 1, 0, 0 );
-	this.clientTimeout        = createTimespan( 0, 1, 0, 0 );
+	this.clientTimeout        = createTimespan( 1, 0, 0, 0 );
 	this.setClientCookies     = true;
 	this.setDomainCookies     = true;
 	this.scriptProtect        = false;

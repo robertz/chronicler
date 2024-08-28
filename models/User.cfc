@@ -8,6 +8,9 @@ component display="User" accessors="true" {
 	property name="email";
 	property name="password";
 
+	/**
+	 * init
+	 */
 	function init(){
 		variables.id           = "";
 		variables.display_name = "";
@@ -16,6 +19,9 @@ component display="User" accessors="true" {
 		return this;
 	}
 
+	/**
+	 * get memento for current user
+	 */
 	function getMemento(){
 		return {
 			"id"           : variables.id,
@@ -24,6 +30,13 @@ component display="User" accessors="true" {
 		}
 	}
 
+	/**
+	 * gets a user by id and populates the bean
+	 *
+	 * @id
+	 *
+	 * @return the current instance
+	 */
 	function getById( required string id ){
 		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
 		var user = qb
@@ -37,6 +50,13 @@ component display="User" accessors="true" {
 		return this;
 	}
 
+	/**
+	 * gets a user by email and populates the bean
+	 *
+	 * @email email of the user
+	 *
+	 * @return the current instance
+	 */
 	function getByEmail( required string email ){
 		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
 		var user = qb

@@ -4,15 +4,26 @@ component extends="coldbox.system.EventHandler" {
 	property name="PostService" inject;
 	property name="BCrypt"      inject="@BCrypt";
 
+	/**
+	 * handle authentication
+	 *
+	 * @event         
+	 * @rc            
+	 * @prc           
+	 * @action        
+	 * @eventArguments
+	 */
 	function preHandler( event, rc, prc, action, eventArguments ){
+		// allow unauthenticated users to view index and logout
 		if ( action == "index" || action == "logout" ) return;
+		// if trying to view a secured action, bounce the user to login if not authenticated
 		if ( !client.keyExists( "uid" ) || !client.uid.len() ) relocate( "ed" );
-
+		// store the current user in the prc scope
 		prc.oUser = getInstance( "User" ).getById( client.uid ).getMemento();
 	}
 
 	/**
-	 * index handler
+	 * authentication handler
 	 *
 	 * @event
 	 * @rc   
@@ -37,6 +48,13 @@ component extends="coldbox.system.EventHandler" {
 		prc.token = csrfToken();
 	}
 
+	/**
+	 * logout the current user
+	 *
+	 * @event
+	 * @rc   
+	 * @prc  
+	 */
 	function logout( event, rc, prc ){
 		client.delete( "uid" );
 		csrfRotate();

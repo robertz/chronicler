@@ -18,6 +18,9 @@
                         </div>
                     </div>
 
+					<div class="alert alert-info">
+						Views: #prc.post.views#
+					</div>
                     <div class="">
                         #prc.rendered#
                     </div>

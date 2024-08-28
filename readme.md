@@ -44,6 +44,15 @@ create table UserPost
     constraint UserPost_User_id_fk
         foreign key (user_id) references User (id)
 );
+
+create table Views
+(
+    post_id     varchar(36)                         not null,
+    views       int       default 0                 not null,
+    last_viewed timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP,
+    constraint Views_Post_id_fk
+        foreign key (post_id) references Post (id)
+);
 ```
 
 ### THE DAILY BREAD

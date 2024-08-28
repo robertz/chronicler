@@ -41,6 +41,7 @@
                     <thead>
 						<th>Actions</th>
                         <th>Title</th>
+						<th>Views</th>
                         <th>Published</th>
                     </thead>
                     <tbody>
@@ -51,7 +52,8 @@
 									<a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
 								</td>
                                 <td>#p.title#</td>
-                                <td>#dateTimeFormat(p.publish_date, "medium")#</td>
+								<td>#p.views#</td>
+                                <td>#dateFormat(p.publish_date, "yyyy-mm-dd")#</td>
                             </tr>
                         </cfloop>
                     </tbody>

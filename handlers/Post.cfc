@@ -7,11 +7,15 @@ component extends="coldbox.system.EventHandler" {
 
 	function index( event, rc, prc ){
 		var post = {};
-		var bean = wirebox.getInstance( "Post" );
-		post     = bean.getByRouteParams( rc ).getMemento();
+		var bean = wirebox.getInstance( "Post" ).getByRouteParams( rc );
+		post     = bean.getMemento();
 		if ( !post.id.len() ) location( "/", false );
 		prc.post     = post;
 		prc.rendered = processor.toHtml( prc.post.body );
+
+
+		bean.updateViews();
+
 		event.setView( "post/index" );
 	}
 
