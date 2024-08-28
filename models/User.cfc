@@ -20,9 +20,21 @@ component display="User" accessors="true" {
 		return {
 			"id"           : variables.id,
 			"display_name" : variables.display_name,
-			"email"        : variables.email,
-			"password"     : variables.password
+			"email"        : variables.email
 		}
+	}
+
+	function getById( required string id ){
+		var qb   = wirebox.getInstance( "QueryBuilder@qb" );
+		var user = qb
+			.from( "User" )
+			.where( "id", arguments.id )
+			.first()
+
+		if ( !user.isEmpty() ) {
+			populator.populateFromStruct( target = this, memento = user );
+		}
+		return this;
 	}
 
 	function getByEmail( required string email ){

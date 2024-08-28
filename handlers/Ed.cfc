@@ -6,8 +6,9 @@ component extends="coldbox.system.EventHandler" {
 
 	function preHandler( event, rc, prc, action, eventArguments ){
 		if ( action == "index" || action == "logout" ) return;
-
 		if ( !client.keyExists( "uid" ) || !client.uid.len() ) relocate( "ed" );
+
+		prc.oUser = getInstance( "User" ).getById( client.uid ).getMemento();
 	}
 
 	/**
