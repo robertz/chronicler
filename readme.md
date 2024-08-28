@@ -27,7 +27,11 @@ create table User
 (
     id           varchar(36) default (uuid()) not null
         primary key,
-    display_name varchar(50)                  null
+    display_name varchar(50)                  not null,
+    email        varchar(255)                 not null,
+    password     varchar(1000)                not null,
+    constraint User_email_uindex
+        unique (email)
 );
 
 create table UserPost
@@ -40,8 +44,6 @@ create table UserPost
     constraint UserPost_User_id_fk
         foreign key (user_id) references User (id)
 );
-
-
 ```
 
 ### THE DAILY BREAD
