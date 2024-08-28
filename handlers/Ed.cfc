@@ -2,9 +2,12 @@ component extends="coldbox.system.EventHandler" {
 
 	property name="processor"   inject="Processor@cbmarkdown";
 	property name="PostService" inject;
+	property name="BCrypt"      inject="@BCrypt";
 
 	function preHandler( event, rc, prc, action, eventArguments ){
 		if ( action == "index" ) return;
+
+		if ( !client.keyExists( "uid" ) || !client.uid.len() ) relocate( "ed" );
 	}
 
 	/**
@@ -14,7 +17,33 @@ component extends="coldbox.system.EventHandler" {
 	 * @rc   
 	 * @prc  
 	 */
-	function index( event, rc, prc ){
+	function index( event, rc, prc ) allowedMethod="GET,POST"{
+		prc.errors = [];
+		if ( event.getHTTPMethod() == "POST" ) {
+			if ( csrfVerify( rc.token ) ) {
+				var user = getInstance( "User" );
+				user.getByEmail( rc.user );
+				if ( BCrypt.checkPassword( rc.pass, user.getPassword() ) ) {
+					client.uid = user.getId();
+					csrfRotate();
+					relocate( "ed.dashboard" );
+				}
+			} else {
+				relocate( "ed" );
+			}
+		}
+		if ( client.keyExists( "uid" ) && client.uid.len() ) relocate( "ed.dashboard" );
+		prc.token = csrfToken();
+	}
+
+	/**
+	 * dashboard
+	 *
+	 * @event
+	 * @rc   
+	 * @prc  
+	 */
+	function dashboard( event, rc, prc ){
 		prc.drafts    = PostService.listDraftPosts();
 		prc.published = PostService.listPublishedPosts();
 	}
