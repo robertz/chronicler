@@ -42,7 +42,7 @@ component display="Post" accessors="true" {
 	 * @return the current memento
 	 */
 	function getMemento(){
-		var post = {
+		return {
 			"id"           : variables.id,
 			"title"        : variables.title,
 			"slug"         : variables.slug,
@@ -55,7 +55,6 @@ component display="Post" accessors="true" {
 			"display_name" : variables.display_name,
 			"views"        : variables.views
 		}
-		return post;
 	}
 
 	/**
@@ -89,7 +88,7 @@ component display="Post" accessors="true" {
 
 		if ( !post.isEmpty() ) {
 			populator.populateFromStruct( target = this, memento = post );
-			if ( isNull( variables.views ) || !isNumeric( variables.views ) ) variables.views = 0;
+			if ( isNull( variables.views ) || !isNumeric( variables.views ) ) variables.views = 1;
 		}
 		return this;
 	}
@@ -143,7 +142,7 @@ component display="Post" accessors="true" {
 
 		if ( !post.isEmpty() ) {
 			populator.populateFromStruct( target = this, memento = post );
-			if ( isNull( variables.views ) || !isNumeric( variables.views ) ) variables.views = 0;
+			if ( isNull( variables.views ) || !isNumeric( variables.views ) ) variables.views = 1;
 		}
 		return this;
 	}
