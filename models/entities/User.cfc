@@ -2,6 +2,7 @@ component display="User" accessors="true" {
 
 	property name="populator" inject="wirebox:populator";
 	property name="wirebox"   inject="wirebox";
+	property name="BCrypt"    inject="@BCrypt";
 
 	property name="id";
 	property name="display_name";
@@ -68,6 +69,26 @@ component display="User" accessors="true" {
 			populator.populateFromStruct( target = this, memento = user );
 		}
 		return this;
+	}
+
+	/**
+	 * Authenticate a user
+	 *
+	 * @string password
+	 *
+	 * @return boolean
+	 */
+	function authenticate( required string password ){
+		return BCrypt.checkPassword( arguments.password, getPassword() )
+	}
+
+	/**
+	 * determines if the user has been loaded
+	 *
+	 * @return boolean
+	 */
+	function hasLoaded(){
+		return len( getId() ) ? true : false;
 	}
 
 }

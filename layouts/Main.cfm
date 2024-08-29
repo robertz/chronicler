@@ -37,9 +37,12 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a href="/ed" class="nav-link">Editor</a>
-						</li>
+
+						<cfif client.keyExists("uid") && len(client.uid)>
+							<li class="nav-item">
+								<a href="/ed" class="nav-link">Editor</a>
+							</li>
+						</cfif>
 					</ul>
 
 				</div>

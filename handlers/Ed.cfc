@@ -29,13 +29,15 @@ component extends="coldbox.system.EventHandler" {
 	 * @rc   
 	 * @prc  
 	 */
-	function index( event, rc, prc ) allowedMethod="GET,POST"{
-		prc.errors = [];
+	function index( event, rc, prc ) allowedMethods="GET,POST"{
+		prc.user  = event.getValue( "user", "" );
+		prc.pass  = event.getValue( "pass", "" );
+		prc.token = csrfToken();
+
 		if ( event.getHTTPMethod() == "POST" ) {
 			if ( csrfVerify( rc.token ) ) {
-				var user = getInstance( "User" );
-				user.getByEmail( rc.user );
-				if ( BCrypt.checkPassword( rc.pass, user.getPassword() ) ) {
+				var user = getInstance( "User" ).getByEmail( prc.user );
+				if ( user.hasLoaded() && user.authenticate( prc.pass ) ) {
 					client.uid = user.getId();
 					csrfRotate();
 					relocate( "ed.dashboard" );
@@ -45,7 +47,6 @@ component extends="coldbox.system.EventHandler" {
 			}
 		}
 		if ( client.keyExists( "uid" ) && client.uid.len() ) relocate( "ed.dashboard" );
-		prc.token = csrfToken();
 	}
 
 	/**
