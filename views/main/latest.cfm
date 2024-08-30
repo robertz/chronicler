@@ -27,11 +27,11 @@
             <div class="col-md-4 pl-1 my-1">
                 <div class="card">
                     <div class="card-body">
-						<h5 class="card-title">Recent Posts</h5>
+                        <h5 class="card-title">Recent Posts</h5>
                         <div class="card-text">
                             <cfloop from="1" to="5" index="i">
-								<a href="#buildPermalink(prc.posts[i])#" style="color: var(--post-link-text); text-decoration">#prc.posts[i].title#</a><br />
-							</cfloop>
+                                <a href="#buildPermalink(prc.posts[i])#" style="color: var(--post-link-text); text-decoration">#prc.posts[i].title#</a><br />
+                            </cfloop>
                         </div>
 
                     </div>

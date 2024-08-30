@@ -9,6 +9,10 @@ component extends="coldbox.system.EventHandler" {
 		prc[ "posts" ] = PostService.listPublishedPosts();
 	}
 
+	function latest( event, rc, prc ){
+		prc[ "posts" ] = PostService.listPublishedPosts();
+	}
+
 	/**
 	 * --------------------------------------------------------------------------
 	 * Implicit Actions

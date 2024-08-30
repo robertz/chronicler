@@ -12,6 +12,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-one-dark.min.css" integrity="sha512-c6S8OdtvoqZCbMfA1lWE0qd368pLdFvVHVILQzNizfowC+zV8rmVKdSlmL5SuidvATO0A7awDg53axd+s/9amw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="/resources/css/site.css">
 	<style>
 		.text-blue {
 			color: ##379BC1;
@@ -27,7 +28,7 @@
 			<div class="container-fluid">
 				<!---Brand --->
 				<a class="navbar-brand" href="#event.buildLink( '' )#">
-					<strong>KISDigital</strong>
+					<span style="color: var(--post-link-text);">KIS</span>Digital
 				</a>
 
 				<!--- Mobile Toggler --->
@@ -38,9 +39,13 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav">
 
+						<li class="nav-item">
+							<a href="/latest" class="nav-link">Latest</a>
+						</li>
+
 						<cfif client.keyExists("uid") && len(client.uid)>
 							<li class="nav-item">
-								<a href="/ed" class="nav-link">Editor</a>
+								<a href="/ed/dashboard" class="nav-link">Ed</a>
 							</li>
 						</cfif>
 					</ul>

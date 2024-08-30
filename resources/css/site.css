@@ -1,0 +1,22 @@
+body {
+	background-color: #000;
+	padding-top: 60px;
+	font-family: Noto Sans, Arial, sans-serif;
+	font-size: 1em;
+}
+
+a {
+	text-color: var(--post-link-text);
+	text-decoration: none;
+}
+
+:root {
+	--main-padding: 5px 8px 10px;
+	--main-background-color: #1a1a1b;
+	--main-border-color: #424242;
+	--light-border-color: #555555;
+	--post-anchor: rgb(215, 218, 220);
+	--post-anchor-visited: #808080;
+	--post-link-text: #4FBCFF;
+	--bs-code-color: #ffc0cb;
+}
