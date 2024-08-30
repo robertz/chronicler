@@ -75,6 +75,18 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	/**
+	 * dashboard
+	 *
+	 * @event
+	 * @rc   
+	 * @prc  
+	 */
+	function settings( event, rc, prc ){
+		prc.drafts    = PostService.listDraftPosts();
+		prc.published = PostService.listPublishedPosts();
+	}
+
+	/**
 	 * view a post by id
 	 *
 	 * @event
