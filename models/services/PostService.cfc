@@ -88,6 +88,30 @@ component {
 			.get();
 	}
 
+	function getMostRead(){
+		return wirebox
+			.getInstance( "QueryBuilder@qb" )
+			.select( [
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"U.display_name",
+				"V.views"
+			] )
+			.from( "Post P" )
+			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
+			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.limit( 3 )
+			.orderBy( "views", "desc" )
+			.get();
+	}
+
 	/**
 	 * Get all published, excluding the body
 	 *

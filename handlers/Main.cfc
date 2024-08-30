@@ -10,7 +10,8 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	function latest( event, rc, prc ){
-		prc[ "posts" ] = PostService.listPublishedPosts();
+		prc.mostRead = PostService.getMostRead();
+		prc.posts    = PostService.listPublishedPosts();
 	}
 
 	/**

@@ -16,7 +16,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="">
+			<div class="mt-2">
 				#prc.rendered#
 			</div>
 		</div>

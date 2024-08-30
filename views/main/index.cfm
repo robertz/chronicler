@@ -27,13 +27,24 @@
             <div class="col-md-4 pl-1 my-1">
                 <div class="card">
                     <div class="card-body">
-						<h5 class="card-title">Recent Posts</h5>
-                        <div class="card-text">
-                            <cfloop from="1" to="5" index="i">
-								<a href="#buildPermalink(prc.posts[i])#" style="color: var(--post-link-text); text-decoration">#prc.posts[i].title#</a><br />
+						<h5 class="card-title">Latest Posts</h5>
+                        <div class="card-text p-1">
+                            <cfloop from="1" to="3" index="i">
+								<div class="row my-1 rounded border border-2">
+									<div class="col-3 rounded-start" style="background: url(#prc.posts[i].cover_image#) no-repeat center center; background-size: cover; height: 100px;">
+										<a href="#buildPermalink(prc.posts[i])#" class="d-block w-100 h-100"></a>
+									</div>
+									<div class="col-9 rounded-end pt-2 position-relative">
+										<div class="fw-bold">
+											<a href="#buildPermalink(prc.posts[i])#" class="text-dark text-decoration-none">#prc.posts[i].title# </a>
+										</div>
+									</div>
+								</div>
 							</cfloop>
+							<div class="mt-3 text-end">
+								<a href="/latest">More Posts</a>
+							</div>
                         </div>
-
                     </div>
                 </div>
             </div>

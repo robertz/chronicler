@@ -6,8 +6,12 @@ body {
 }
 
 a {
-	text-color: var(--post-link-text);
 	text-decoration: none;
+}
+
+blockquote {
+	border-left: 4px solid #4fbcff;
+	padding: 1em 1em 0.1em 2em;
 }
 
 :root {
@@ -18,5 +22,8 @@ a {
 	--post-anchor: rgb(215, 218, 220);
 	--post-anchor-visited: #808080;
 	--post-link-text: #4FBCFF;
-	--bs-code-color: #ffc0cb;
+
+	--bs-link-color: #4fbcff;
+	--bs-code-color: #952d0a;
+
 }
