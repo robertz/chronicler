@@ -6,16 +6,17 @@
                 <cfloop array="#prc.posts.results#" index="post">
 
                     <div class="row my-1 rounded border border-2">
+
                         <div class="col-3 rounded-start" style="background: url(#post.cover_image#) no-repeat center center; background-size: cover; height: 160px;">
                             <a href="#buildPermalink(post)#" class="d-block w-100 h-100"></a>
                         </div>
-                        <div class="col-9 rounded-end pt-2 position-relative">
+                        <div class="col-9 rounded-end pt-2 d-flex align-items-start flex-column">
                             <div class="h4">
                                 <a href="#buildPermalink(post)#" class="text-dark text-decoration-none">#post.title# </a>
                             </div>
                             #post.description#
 
-                            <div class="position-absolute bottom-0 start-1 pb-2">
+                            <div class="mt-auto pb-2 d-none d-lg-none d-xl-block align-bottom">
                                 <span class="fw-bold">Published:</span> #post.publish_date.dateFormat("long")#
                             </div>
 

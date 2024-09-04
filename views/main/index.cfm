@@ -20,12 +20,12 @@
 					<div class="col-3 rounded-start" style="background: url(#prc.posts.results[i].cover_image#) no-repeat center center; background-size: cover; height: 160px;">
 						<a href="#buildPermalink(prc.posts.results[i])#" class="d-block w-100 h-100"></a>
 					</div>
-					<div class="col-9 rounded-end pt-2 position-relative">
+					<div class="col-9 rounded-end pt-2 d-flex align-items-start flex-column">
 						<div class="h4">
 							<a href="#buildPermalink(prc.posts.results[i])#" class="text-dark text-decoration-none">#prc.posts.results[i].title# </a>
 						</div>
 						#prc.posts.results[i].description# <br>
-						<div class="mt-2 pb-2 d-none d-lg-none d-xl-block">
+						<div class="mt-auto pb-2 d-none d-lg-none d-xl-block">
 							<span class="fw-bold hidden-md">Published:</span> #prc.posts.results[i].publish_date.dateFormat("long")#
 						</div>
 
