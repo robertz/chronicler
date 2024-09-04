@@ -112,6 +112,30 @@ component {
 			.get();
 	}
 
+	function getTrending( maxrows = 3 ){
+		return wirebox
+			.getInstance( "QueryBuilder@qb" )
+			.select( [
+				"P.id",
+				"P.title",
+				"P.slug",
+				"P.description",
+				"P.cover_image",
+				"P.created",
+				"P.last_updated",
+				"P.publish_date",
+				"U.display_name"
+			] )
+			.from( "Views V" )
+			.leftJoin( "Post P", "P.id", "=", "V.post_id" )
+			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
+			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.whereRaw( "V.last_viewed >= DATE(NOW() - INTERVAL 7 DAY)" )
+			.limit( arguments.maxrows )
+			.orderBy( "V.last_viewed", "desc" )
+			.get();
+	}
+
 	/**
 	 * Get all published, excluding the body
 	 *
