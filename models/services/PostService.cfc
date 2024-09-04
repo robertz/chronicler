@@ -35,7 +35,7 @@ component {
 	 *
 	 * @return array of posts
 	 */
-	function listPublishedPosts(){
+	function listPublishedPosts( maxrows = 25, page = 1 ){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
 			.select( [
@@ -56,7 +56,7 @@ component {
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
 			.whereNotNull( "publish_date" )
 			.orderBy( "publish_date", "desc" )
-			.get();
+			.paginate( maxrows = arguments.maxrows, page = arguments.page );
 	}
 
 	/**
@@ -88,7 +88,7 @@ component {
 			.get();
 	}
 
-	function getMostRead(){
+	function getMostRead( maxrows = 3 ){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
 			.select( [
@@ -107,7 +107,7 @@ component {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
-			.limit( 3 )
+			.limit( arguments.maxrows )
 			.orderBy( "views", "desc" )
 			.get();
 	}

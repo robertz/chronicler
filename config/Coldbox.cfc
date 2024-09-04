@@ -138,7 +138,7 @@ component {
 		 *
 		 * }
 		 */
-		moduleSettings = {};
+		moduleSettings = { "qb" : { "defaultOptions" : { "timeout" : 60, "shouldMaxRowsOverrideToAll" : true } } };
 
 		/**
 		 * --------------------------------------------------------------------------

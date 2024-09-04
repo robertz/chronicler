@@ -71,7 +71,7 @@ component extends="coldbox.system.EventHandler" {
 	 */
 	function dashboard( event, rc, prc ){
 		prc.drafts    = PostService.listDraftPosts();
-		prc.published = PostService.listPublishedPosts();
+		prc.published = PostService.listPublishedPosts( maxrows = 0 );
 	}
 
 	/**
@@ -83,7 +83,7 @@ component extends="coldbox.system.EventHandler" {
 	 */
 	function settings( event, rc, prc ){
 		prc.drafts    = PostService.listDraftPosts();
-		prc.published = PostService.listPublishedPosts();
+		prc.published = PostService.listPublishedPosts( maxrows = 1000 );
 	}
 
 	/**

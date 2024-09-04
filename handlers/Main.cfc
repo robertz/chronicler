@@ -6,12 +6,15 @@ component extends="coldbox.system.EventHandler" {
 	 * Default Action
 	 */
 	function index( event, rc, prc ){
-		prc[ "posts" ] = PostService.listPublishedPosts();
+		prc[ "posts" ] = PostService.listPublishedPosts( maxrows = 0 );
 	}
 
 	function latest( event, rc, prc ){
-		prc.mostRead = PostService.getMostRead();
-		prc.posts    = PostService.listPublishedPosts();
+		prc.page     = rc.keyExists( "page" ) && isNumeric( rc.page ) ? rc.page : 1;
+		prc.mostRead = PostService.getMostRead( maxrows = 3 );
+		prc.posts    = PostService.listPublishedPosts( maxrows = 6, page = prc.page );
+
+		// writeDump( var = prc.posts, abort = 1 );
 	}
 
 	/**

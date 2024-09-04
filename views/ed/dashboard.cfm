@@ -46,7 +46,7 @@
                             <th>Published</th>
                         </thead>
                         <tbody>
-                            <cfloop array="#prc.published#" index="p">
+                            <cfloop array="#prc.published.results#" index="p">
                                 <tr>
                                     <td>
                                         <a href="/ed/view/id/#p.id#"><i class="bi bi-eye-fill m-2"></i></a>
