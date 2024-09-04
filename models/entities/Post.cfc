@@ -176,7 +176,12 @@ component display="Post" accessors="true" {
 		var qb     = wirebox.getInstance( "QueryBuilder@qb" );
 		var obj    = getMemento();
 		var exists = len( trim( obj.id ) ) ? true : false;
-		var ignore = [ "created", "last_updated", "display_name" ];
+		var ignore = [
+			"created",
+			"last_updated",
+			"display_name",
+			"views"
+		];
 
 		ignore.each( ( el ) => {
 			obj.delete( el );
@@ -197,10 +202,7 @@ component display="Post" accessors="true" {
 			wirebox
 				.getInstance( "QueryBuilder@qb" )
 				.from( "UserPost" )
-				.updateOrInsert( {
-					post_id : obj.id,
-					user_id : "cf509c38-63c0-11ef-b36c-9a6c4d3d4dca"
-				} )
+				.updateOrInsert( { post_id : obj.id, user_id : client.uid } )
 		}
 	}
 
