@@ -223,7 +223,7 @@ component display="Post" accessors="true" {
 
 				// handle tags
 				var tag_array = getTags().listToArray();
-
+				// delete any tags currently assoicated with this post
 				wirebox
 					.getInstance( "QueryBuilder@qb" )
 					.from( "TagPost" )
@@ -231,11 +231,13 @@ component display="Post" accessors="true" {
 					.delete();
 
 				tag_array.each( ( tag ) => {
+					// loop thorugh each tag and create the tag if it does not currently exist
 					wirebox
 						.getInstance( "QueryBuilder@qb" )
 						.from( "Tag" )
 						.insertIgnore( { tag : tag } );
 
+					// get the id for the current tag
 					var tag_id = wirebox
 						.getInstance( "QueryBuilder@qb" )
 						.from( "Tag" )
@@ -243,6 +245,7 @@ component display="Post" accessors="true" {
 						.where( "tag", tag )
 						.first();
 
+					// link the tags to the current post
 					wirebox
 						.getInstance( "QueryBuilder@qb" )
 						.from( "TagPost" )
