@@ -203,7 +203,7 @@ component display="Post" accessors="true" {
 			obj.delete( el );
 		} );
 		// handle empty values
-		if ( !variables.publish_date.len() ) obj.delete( "publish_date" );
+		if ( !len( variables.publish_date ) ) obj.delete( "publish_date" );
 		if ( !variables.id.len() ) {
 			obj.id = lCase( createGUID() );
 		}

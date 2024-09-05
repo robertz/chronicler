@@ -42,7 +42,7 @@ component {
 	 * @return array of posts
 	 */
 	function listPublishedPosts( maxrows = 25, page = 1 ){
-		return wirebox
+		var q = wirebox
 			.getInstance( "QueryBuilder@qb" )
 			.select( [
 				"P.id",
@@ -67,8 +67,10 @@ component {
 					.whereColumn( "TP.post_id", "P.id" )
 			} )
 			.whereNotNull( "publish_date" )
-			.orderBy( "publish_date", "desc" )
-			.paginate( maxrows = arguments.maxrows, page = arguments.page );
+			.orderBy( "publish_date", "desc" );
+
+		if ( arguments.maxrows == 0 ) return q.get();
+		return q.paginate( maxrows = arguments.maxrows, page = arguments.page );
 	}
 
 	/**
