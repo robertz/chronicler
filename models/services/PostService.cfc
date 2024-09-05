@@ -106,6 +106,13 @@ component {
 			.get();
 	}
 
+	/**
+	 * returns an array of posts sorted by the number of views descending
+	 *
+	 * @maxrows number of results to return
+	 *
+	 * @return array of posts
+	 */
 	function getMostRead( maxrows = 3 ){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )
@@ -136,6 +143,13 @@ component {
 			.get();
 	}
 
+	/**
+	 * returns the most recently read articles
+	 *
+	 * @maxrows number of results to return
+	 *
+	 * @return array of posts
+	 */
 	function getTrending( maxrows = 3 ){
 		return wirebox
 			.getInstance( "QueryBuilder@qb" )

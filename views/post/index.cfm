@@ -11,12 +11,12 @@
 						<span class="badge bg-light m-1 p-2 h5 text-dark">#tag#</span>
 					</cfloop>
 					<p class="text-white small text-uppercase">
-						#dateFormat(prc.post.created, "MMMM d, YYYY")# /
+						#dateFormat(prc.post.publish_date, "MMMM d, YYYY")# /
 						#prc.post.display_name#
 					</p>
 				</div>
 			</div>
-			<div class="mt-2">
+			<div class="mt-4">
 				#prc.rendered#
 			</div>
 		</div>
