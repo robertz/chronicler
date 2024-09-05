@@ -6,8 +6,17 @@
 	<!--- Metatags --->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="KISDigital Blog">
-	<meta name="author" content="KISDigital">
+
+	<cfif NOT prc.keyExists("meta")>
+		<meta name="author" content="KISDigital">
+		<meta name="description" content="KISDigital Blog">
+		<meta name="keywords" content="">
+	<cfelse>
+		<meta name="author" content="KISDigital">
+		<cfloop array="#prc.meta#" index="i">
+			#i#
+		</cfloop>
+	</cfif>
 	<base href="#event.getHTMLBaseURL()#" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
