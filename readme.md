@@ -23,6 +23,26 @@ create table Post
     publish_date timestamp                             null
 );
 
+create table Tag
+(
+    id  varchar(36) default (uuid()) not null
+        primary key,
+    tag varchar(50)                  not null,
+    constraint Tag_tag_uindex
+        unique (tag)
+);
+
+create table TagPost
+(
+    tag_id  varchar(36) not null,
+    post_id varchar(36) not null,
+    primary key (tag_id, post_id),
+    constraint TagPost_Post_id_fk
+        foreign key (post_id) references Post (id),
+    constraint TagPost_Tag_id_fk
+        foreign key (tag_id) references Tag (id)
+);
+
 create table User
 (
     id           varchar(36) default (uuid()) not null
@@ -53,6 +73,8 @@ create table Views
     constraint Views_Post_id_fk
         foreign key (post_id) references Post (id)
 );
+
+
 ```
 
 ### THE DAILY BREAD
