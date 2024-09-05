@@ -26,6 +26,12 @@ component {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.orderBy( "publish_date", "desc" )
 			.get();
 	}
@@ -54,6 +60,12 @@ component {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.whereNotNull( "publish_date" )
 			.orderBy( "publish_date", "desc" )
 			.paginate( maxrows = arguments.maxrows, page = arguments.page );
@@ -83,6 +95,12 @@ component {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.whereNull( "publish_date" )
 			.orderBy( "created", "desc" )
 			.get();
@@ -107,6 +125,12 @@ component {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.limit( arguments.maxrows )
 			.orderBy( "views", "desc" )
 			.get();
@@ -130,6 +154,12 @@ component {
 			.leftJoin( "Post P", "P.id", "=", "V.post_id" )
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.whereRaw( "V.last_viewed >= DATE(NOW() - INTERVAL 7 DAY)" )
 			.limit( arguments.maxrows )
 			.orderBy( "V.last_viewed", "desc" )

@@ -11,6 +11,7 @@
                         <thead>
                             <th>Actions</th>
                             <th>Title</th>
+							<th>Tags</th>
                             <th>Created</th>
                             <th>Updated</th>
                         </thead>
@@ -22,6 +23,7 @@
                                         <a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
                                     </td>
                                     <td>#p.title#</td>
+									<td>#p.tags#</td>
                                     <td>#dateTimeFormat(p.created, "medium")#</td>
                                     <td>#dateTimeFormat(p.last_updated, "medium")#</td>
                                 </tr>
@@ -42,8 +44,9 @@
                         <thead>
                             <th>Actions</th>
                             <th>Title</th>
-                            <th>Views</th>
+							<th>Tags</th>
                             <th>Published</th>
+							<th>Views</th>
                         </thead>
                         <tbody>
                             <cfloop array="#prc.published.results#" index="p">
@@ -53,8 +56,9 @@
                                         <a href="/ed/edit/id/#p.id#"><i class="bi bi-pencil-square m-2"></i></a>
                                     </td>
                                     <td>#p.title#</td>
-                                    <td>#p.views#</td>
+									<td>#p.tags#</td>
                                     <td>#dateFormat(p.publish_date, "yyyy-mm-dd")#</td>
+									<td>#p.views#</td>
                                 </tr>
                             </cfloop>
                         </tbody>
