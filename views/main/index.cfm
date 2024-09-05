@@ -25,7 +25,7 @@
 							<a href="#buildPermalink(prc.posts.results[i])#" class="text-dark text-decoration-none">#prc.posts.results[i].title# </a>
 						</div>
 						#prc.posts.results[i].description# <br>
-						<div class="mt-auto pb-2 d-none d-lg-none d-xl-block">
+						<div class="mt-auto pb-2 d-none d-md-none d-lg-block">
 							<span class="fw-bold hidden-md">Published:</span> #prc.posts.results[i].publish_date.dateFormat("long")#
 						</div>
 

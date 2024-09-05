@@ -16,7 +16,7 @@
 						</div>
 						#post.description#
 
-						<div class="mt-auto pb-2 d-none d-lg-none d-xl-block align-bottom">
+						<div class="mt-auto pb-2 d-none d-md-none d-lg-block align-bottom">
 							<span class="fw-bold">Published:</span> #post.publish_date.dateFormat("long")#
 						</div>
 

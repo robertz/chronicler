@@ -14,6 +14,7 @@ component display="Post" accessors="true" {
 	property name="publish_date";
 	property name="display_name";
 	property name="views";
+	property name="tags";
 
 	/**
 	 * Initialize the object
@@ -32,6 +33,7 @@ component display="Post" accessors="true" {
 		// computed
 		variables.display_name = "";
 		variables.views        = 0;
+		variables.tags         = "";
 
 		return this;
 	}
@@ -53,7 +55,8 @@ component display="Post" accessors="true" {
 			"last_updated" : variables.last_updated,
 			"publish_date" : variables.publish_date,
 			"display_name" : variables.display_name,
-			"views"        : variables.views
+			"views"        : variables.views,
+			"tags"         : variables.tags
 		}
 	}
 
@@ -84,6 +87,12 @@ component display="Post" accessors="true" {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.find( arguments.id, "P.id" );
 
 		if ( !post.isEmpty() ) {
@@ -121,6 +130,12 @@ component display="Post" accessors="true" {
 			.leftJoin( "UserPost UP", "UP.post_id", "=", "P.id" )
 			.leftJoin( "User U", "U.id", "=", "UP.user_id" )
 			.leftJoin( "Views V", "V.post_id", "=", "P.id" )
+			.subSelect( "tags", function( q ){
+				q.selectRaw( "GROUP_CONCAT(T.tag)" )
+					.from( "TagPost TP" )
+					.join( "Tag T", "T.id", "=", "TP.tag_id" )
+					.whereColumn( "TP.post_id", "P.id" )
+			} )
 			.whereRaw(
 				"YEAR(publish_date) = ? AND MONTH(publish_date) = ? AND slug = ?",
 				[
@@ -180,7 +195,8 @@ component display="Post" accessors="true" {
 			"created",
 			"last_updated",
 			"display_name",
-			"views"
+			"views",
+			"tags"
 		];
 
 		ignore.each( ( el ) => {
@@ -192,17 +208,53 @@ component display="Post" accessors="true" {
 			obj.id = lCase( createGUID() );
 		}
 
-		// save
-		qb.from( "Post" )
-			.where( "id", obj.id )
-			.updateOrInsert( obj );
+		transaction {
+			try {
+				// save
+				qb.from( "Post" )
+					.where( "id", obj.id )
+					.updateOrInsert( obj );
 
-		if ( !exists ) {
-			// link the author to the post
-			wirebox
-				.getInstance( "QueryBuilder@qb" )
-				.from( "UserPost" )
-				.updateOrInsert( { post_id : obj.id, user_id : client.uid } )
+				// link the author to the post
+				wirebox
+					.getInstance( "QueryBuilder@qb" )
+					.from( "UserPost" )
+					.insertIgnore( { post_id : obj.id, user_id : client.uid } );
+
+				// handle tags
+				var tag_array = getTags().listToArray();
+
+				wirebox
+					.getInstance( "QueryBuilder@qb" )
+					.from( "TagPost" )
+					.where( "post_id", obj.id )
+					.delete();
+
+				tag_array.each( ( tag ) => {
+					wirebox
+						.getInstance( "QueryBuilder@qb" )
+						.from( "Tag" )
+						.insertIgnore( { tag : tag } );
+
+					var tag_id = wirebox
+						.getInstance( "QueryBuilder@qb" )
+						.from( "Tag" )
+						.select( "id" )
+						.where( "tag", tag )
+						.first();
+
+					wirebox
+						.getInstance( "QueryBuilder@qb" )
+						.from( "TagPost" )
+						.insert( { "tag_id" : tag_id.id, "post_id" : obj.id } );
+				} );
+
+				// commit the transaction
+				transaction action="commit";
+			} catch ( any e ) {
+				writeDump( var = e, abort = 1 );
+				transaction action="rollback";
+			}
 		}
 	}
 

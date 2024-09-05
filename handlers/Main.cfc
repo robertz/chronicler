@@ -13,8 +13,8 @@ component extends="coldbox.system.EventHandler" {
 
 	function latest( event, rc, prc ){
 		prc.page     = rc.keyExists( "page" ) && isNumeric( rc.page ) && rc.page > 0 ? rc.page : 1;
-		prc.mostRead = PostService.getMostRead( maxrows = 3 );
 		prc.posts    = PostService.listPublishedPosts( maxrows = 6, page = prc.page );
+		prc.mostRead = PostService.getMostRead( maxrows = 3 );
 	}
 
 	/**
