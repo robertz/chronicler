@@ -1,8 +1,9 @@
 component extends="coldbox.system.EventHandler" {
 
-	property name="processor"   inject="Processor@cbmarkdown";
-	property name="PostService" inject;
-	property name="BCrypt"      inject="@BCrypt";
+	property name="processor"    inject="Processor@cbmarkdown";
+	property name="BCrypt"       inject="@BCrypt";
+	property name="PostService"  inject;
+	property name="MediaService" inject;
 
 	/**
 	 * handle authentication
@@ -75,15 +76,24 @@ component extends="coldbox.system.EventHandler" {
 	}
 
 	/**
-	 * dashboard
+	 * settings
 	 *
 	 * @event
 	 * @rc   
 	 * @prc  
 	 */
 	function settings( event, rc, prc ){
-		prc.drafts    = PostService.listDraftPosts();
-		prc.published = PostService.listPublishedPosts( maxrows = 1000 );
+	}
+
+	/**
+	 * settings
+	 *
+	 * @event
+	 * @rc   
+	 * @prc  
+	 */
+	function media( event, rc, prc ){
+		prc.images = MediaService.listMedia();
 	}
 
 	/**
