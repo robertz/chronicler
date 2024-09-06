@@ -11,6 +11,8 @@ component display="User" accessors="true" {
 
 	/**
 	 * init
+	 *
+	 * @return the current instance
 	 */
 	function init(){
 		variables.id           = "";
@@ -22,6 +24,8 @@ component display="User" accessors="true" {
 
 	/**
 	 * get memento for current user
+	 *
+	 * @return struct
 	 */
 	function getMemento(){
 		return {
