@@ -41,7 +41,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Trending</h5>
 					<div class="card-text p-1">
-						<cfloop from="1" to="3" index="i">
+						<cfloop from="1" to="#arrayLen(prc.trending)#" index="i">
 							<div class="row my-1 rounded border border-2">
 								<div class="col-3 rounded-start" style="background: url(#prc.trending[i].cover_image#) no-repeat center center; background-size: cover; height: 100px;">
 									<a href="#buildPermalink(prc.trending[i])#" class="d-block w-100 h-100"></a>
@@ -66,7 +66,7 @@
 				<div class="card-body">
 					<h5 class="card-title">Most Read</h5>
 					<div class="card-text p-1">
-						<cfloop from="1" to="3" index="i">
+						<cfloop from="1" to="#arrayLen(prc.mostRead)#" index="i">
 							<div class="row my-1 rounded border border-2">
 								<div class="col-3 rounded-start" style="background: url(#prc.mostRead[i].cover_image#) no-repeat center center; background-size: cover; height: 100px;">
 									<a href="#buildPermalink(prc.mostRead[i])#" class="d-block w-100 h-100"></a>

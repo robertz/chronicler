@@ -1,5 +1,10 @@
 component {
 
+	/**
+	 * Scans the media directory for files
+	 *
+	 * @return array of file objects
+	 */
 	function listMedia(){
 		var files = directoryList(
 			path     = expandPath( "/media" ),
